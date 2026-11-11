@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VELVET Studio Beauty | Estúdio de Beleza de Alto Padrão</title>
+  <meta name="description" content="Cabelos deslumbrantes, olhar magnético e unhas de grife. O estúdio de beleza de luxo mais exclusivo da região.">
+  <meta name="theme-color" content="#0F0A0E">
+
+  <!-- Google Fonts: Syne & DM Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Syne:wght@400..800&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#0F0A0E',
+            eggplant: '#1A1118',
+            'eggplant-light': '#241822',
+            pearl: '#FAF5F7',
+            mauve: '#B8A6B2',
+            'rose-gold': '#E5B299',
+            'rose-gold-dark': '#D48C70',
+            berry: '#9E3B63',
+          },
+          fontFamily: {
+            syne: ['Syne', 'sans-serif'],
+            sans: ['DM Sans', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          backgroundImage: {
+            'rose-gradient': 'linear-gradient(135deg, #E5B299 0%, #D48C70 100%)',
+            'berry-gradient': 'linear-gradient(135deg, #9E3B63 0%, #D48C70 100%)',
+            'glow-radial': 'radial-gradient(circle at 50% 50%, rgba(229, 178, 153, 0.15) 0%, transparent 70%)',
+          },
+          boxShadow: {
+            'rose-glow': '0 0 35px -5px rgba(229, 178, 153, 0.35)',
+            'rose-card': '0 20px 40px -15px rgba(15, 10, 14, 0.8), 0 0 0 1px rgba(229, 178, 153, 0.15)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0F0A0E;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2A1A26;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #D48C70;
+    }
+
+    /* Before-After Slider styles */
+    .slider-container {
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+    }
+    .slider-image-before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .slider-image-after {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .slider-before-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      overflow: hidden;
+      width: 50%;
+      border-right: 2px solid #E5B299;
+      box-shadow: 2px 0 15px rgba(229, 178, 153, 0.4);
+    }
+    .slider-handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 20;
+    }
+    .slider-input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: ew-resize;
+      z-index: 30;
+      margin: 0;
+    }
+
+    /* Subtle Glass Border Animation */
+    .glass-card {
+      background: rgba(26, 17, 24, 0.7);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(229, 178, 153, 0.15);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(229, 178, 153, 0.45);
+      box-shadow: 0 10px 30px -10px rgba(229, 178, 153, 0.2);
+    }
+
+    /* Chip Selection */
+    .service-chip.active {
+      background: linear-gradient(135deg, rgba(229, 178, 153, 0.25) 0%, rgba(212, 140, 112, 0.2) 100%);
+      border-color: #E5B299 !important;
+      color: #FAF5F7 !important;
+      box-shadow: 0 0 18px rgba(229, 178, 153, 0.3);
+    }
+    .service-chip.active .check-icon {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .period-chip.active {
+      background: linear-gradient(135deg, #E5B299 0%, #D48C70 100%);
+      color: #0F0A0E !important;
+      font-weight: 700;
+      border-color: #E5B299 !important;
+      box-shadow: 0 0 20px rgba(229, 178, 153, 0.4);
+    }
+  </style>
+</head>
+<body class="bg-obsidian text-pearl font-sans selection:bg-rose-gold selection:text-obsidian antialiased overflow-x-hidden min-h-screen">
+
+  <!-- Ambient Luxury Background Glows -->
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-glow-radial pointer-events-none z-0 opacity-70"></div>
+  <div class="fixed bottom-10 right-0 w-[500px] h-[500px] bg-berry/10 rounded-full blur-[140px] pointer-events-none z-0"></div>
+  <div class="fixed top-1/3 -left-40 w-[600px] h-[600px] bg-rose-gold/10 rounded-full blur-[160px] pointer-events-none z-0"></div>
+
+  <!-- ============================================================ -->
+  <!-- A. HEADER FLUTUANTE ESTILO PÍLULA (CENTRALIZADO NO TOPO) -->
+  <!-- ============================================================ -->
+  <header class="fixed top-4 left-0 right-0 z-50 px-4">
+    <nav class="max-w-5xl mx-auto backdrop-blur-xl bg-eggplant/85 border border-white/10 rounded-full py-3 px-6 shadow-2xl flex items-center justify-between transition-all duration-300 hover:border-rose-gold/30">
+      
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-1.5 group">
+        <span class="font-syne font-extrabold text-2xl tracking-wider text-pearl group-hover:text-rose-gold transition-colors">
+          VELVET<span class="text-rose-gold text-3xl leading-none">.</span>
+        </span>
+        <span class="text-[10px] uppercase font-bold tracking-[0.25em] text-mauve border-l border-white/15 pl-2 ml-1 hidden sm:inline-block">
+          Studio Beauty
+        </span>
+      </a>
+
+      <!-- Desktop Links -->
+      <div class="hidden lg:flex items-center gap-7 text-xs font-medium uppercase tracking-wider text-mauve">
+        <a href="#vitrine" class="hover:text-rose-gold transition-colors">Vitrine</a>
+        <a href="#combos" class="hover:text-rose-gold transition-colors">Combos VIP</a>
+        <a href="#transformacoes" class="hover:text-rose-gold transition-colors">Antes & Depois</a>
+        <a href="#fundadora" class="hover:text-rose-gold transition-colors">A Fundadora</a>
+        <a href="#agendador" class="hover:text-rose-gold transition-colors flex items-center gap-1 text-pearl">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-rose-gold"></i>
+          Montador Rápido
+        </a>
+      </div>
+
+      <!-- Action Button & Mobile Trigger -->
+      <div class="flex items-center gap-3">
+        <a href="#agendador" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-rose-gradient text-obsidian font-syne font-bold text-xs uppercase tracking-wider hover:opacity-90 hover:shadow-rose-glow transition-all active:scale-95">
+          <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+          Reservar Vaga
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-full text-mauve hover:text-pearl hover:bg-white/5 transition-colors" aria-label="Abrir Menu">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Drawer Overlay -->
+    <div id="mobile-drawer" class="hidden fixed inset-x-4 top-20 bg-eggplant/95 backdrop-blur-2xl border border-rose-gold/25 rounded-3xl p-6 shadow-2xl z-50 flex-col gap-4 text-center">
+      <a href="#vitrine" class="mobile-nav-link py-2 text-mauve hover:text-rose-gold font-syne text-base tracking-wide transition-colors">Vitrine de Serviços</a>
+      <a href="#combos" class="mobile-nav-link py-2 text-mauve hover:text-rose-gold font-syne text-base tracking-wide transition-colors">Combos Day Spa VIP</a>
+      <a href="#transformacoes" class="mobile-nav-link py-2 text-mauve hover:text-rose-gold font-syne text-base tracking-wide transition-colors">Antes & Depois Interativo</a>
+      <a href="#fundadora" class="mobile-nav-link py-2 text-mauve hover:text-rose-gold font-syne text-base tracking-wide transition-colors">A Fundadora</a>
+      <a href="#faq" class="mobile-nav-link py-2 text-mauve hover:text-rose-gold font-syne text-base tracking-wide transition-colors">Espaço & Dúvidas</a>
+      <hr class="border-white/10 my-1">
+      <a href="#agendador" class="mobile-nav-link inline-flex items-center justify-center gap-2 py-3 rounded-full bg-rose-gradient text-obsidian font-syne font-bold text-sm uppercase tracking-wider">
+        <i data-lucide="calendar-check" class="w-4 h-4"></i>
+        Montar Meu Atendimento
+      </a>
+    </div>
+  </header>
+
+  <main class="relative z-10 pt-28">
+
+    <!-- ============================================================ -->
+    <!-- B. HERO SECTION (IMPACTO CENTRALIZADO + TRÍPTICO VISUAL) -->
+    <!-- ============================================================ -->
+    <section class="relative px-4 pb-20 pt-8 max-w-6xl mx-auto text-center">
+      
+      <!-- Glow Decorator -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-eggplant/80 border border-rose-gold/40 text-xs font-semibold tracking-wider text-rose-gold mb-6 shadow-sm">
+        <i data-lucide="sparkle" class="w-3.5 h-3.5 fill-rose-gold text-rose-gold animate-pulse"></i>
+        <span>★ O Estúdio Mais Completo da Região</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="font-syne font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.08] tracking-tight max-w-4xl mx-auto mb-6">
+        Sinta o Poder de Estar <br class="hidden sm:inline">
+        <span class="bg-gradient-to-r from-pearl via-rose-gold to-rose-gold-dark bg-clip-text text-transparent">
+          Impecável da Cabeça aos Pés.
+        </span>
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="text-mauve text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10 font-normal">
+        Cabelos deslumbrantes, olhar magnético e unhas de grife. Tudo em um ambiente exclusivo onde você é a protagonista.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+        <a href="#agendador" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-rose-gradient text-obsidian font-syne font-extrabold text-sm uppercase tracking-wider hover:shadow-rose-glow hover:scale-[1.02] active:scale-95 transition-all">
+          <i data-lucide="wand-2" class="w-4 h-4"></i>
+          Montar Meu Atendimento
+        </a>
+        <a href="#transformacoes" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/15 hover:border-rose-gold/40 text-pearl font-syne font-semibold text-sm uppercase tracking-wider transition-all">
+          <i data-lucide="eye" class="w-4 h-4 text-rose-gold"></i>
+          Ver Transformações
+        </a>
+      </div>
+
+      <!-- Base do Hero: Tríptico Visual (3 Closes de Alta Performance) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left pt-4">
+        
+        <!-- Card 1: Olhar -->
+        <div class="group relative rounded-3xl overflow-hidden border border-white/10 hover:border-rose-gold/60 transition-all duration-500 hover:-translate-y-1.5 shadow-rose-card h-96">
+          <img src="https://images.unsplash.com/photo-1583001809863-234b553f146a?auto=format&fit=crop&w=800&q=80" alt="Olhar Magnético Velvet" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/40 to-transparent"></div>
+          
+          <div class="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-obsidian/85 backdrop-blur-md border border-rose-gold/30 text-[11px] font-bold text-pearl">
+            <span class="text-rose-gold">⭐ 5.0</span> em Durabilidade
+          </div>
+
+          <div class="absolute bottom-5 inset-x-5">
+            <span class="text-xs uppercase tracking-widest text-rose-gold font-syne font-semibold">Destaque 01</span>
+            <h2 class="text-xl font-syne font-bold text-pearl">Olhar: Cílios & Sobrancelhas</h2>
+            <p class="text-xs text-mauve mt-1">Design estratégico, volume russo e nano shadow de alta precisão.</p>
+          </div>
+        </div>
+
+        <!-- Card 2: Hair (Elevated / Highlight) -->
+        <div class="group relative rounded-3xl overflow-hidden border border-rose-gold/50 transition-all duration-500 md:-translate-y-3 hover:-translate-y-4 shadow-rose-glow h-96">
+          <img src="https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=800&q=80" alt="Hair Concept Mechas Velvet" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/40 to-transparent"></div>
+          
+          <div class="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-gradient text-obsidian text-[11px] font-syne font-extrabold shadow-md">
+            <span>👑 MAIS PEDIDO</span>
+          </div>
+
+          <div class="absolute bottom-5 inset-x-5">
+            <span class="text-xs uppercase tracking-widest text-rose-gold font-syne font-semibold">Destaque 02</span>
+            <h2 class="text-xl font-syne font-bold text-pearl">Hair: Loiros & Morena Iluminada</h2>
+            <p class="text-xs text-mauve mt-1">Saúde capilar em 1º lugar com ozonioterapia e mechas autorais.</p>
+          </div>
+        </div>
+
+        <!-- Card 3: Nails -->
+        <div class="group relative rounded-3xl overflow-hidden border border-white/10 hover:border-rose-gold/60 transition-all duration-500 hover:-translate-y-1.5 shadow-rose-card h-96">
+          <img src="https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=800&q=80" alt="Nail Couture Fibra Velvet" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/40 to-transparent"></div>
+          
+          <div class="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-obsidian/85 backdrop-blur-md border border-rose-gold/30 text-[11px] font-bold text-pearl">
+            <span class="text-rose-gold">💎 Acabamento</span> Fino & Natural
+          </div>
+
+          <div class="absolute bottom-5 inset-x-5">
+            <span class="text-xs uppercase tracking-widest text-rose-gold font-syne font-semibold">Destaque 03</span>
+            <h2 class="text-xl font-syne font-bold text-pearl">Nails: Fibra & Nail Art</h2>
+            <p class="text-xs text-mauve mt-1">Alongamento anatômico com curvatura C perfeita e brilho vítreo.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- C. VITRINE VISUAL DE SERVIÇOS (GRID DE 6 CATEGORIAS) -->
+    <!-- ============================================================ -->
+    <section id="vitrine" class="py-20 px-4 max-w-6xl mx-auto">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs uppercase tracking-[0.25em] font-syne font-bold text-rose-gold block mb-2">Menu de Especialidades</span>
+        <h2 class="font-syne font-extrabold text-3xl sm:text-4xl lg:text-5xl text-pearl mb-4">
+          Tudo o que sua beleza precisa em um único endereço
+        </h2>
+        <p class="text-mauve text-sm sm:text-base">
+          Chega de perder horas da semana pulando de clínica em clínica. No Velvet Studio, cada detalhe do seu visual é executado por profissionais ultraespecialistas.
+        </p>
+      </div>
+
+      <!-- 6 Big Category Cards (3x2 Desktop Grid) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+
+        <!-- Categoria 1: Lash Design -->
+        <div class="glass-card rounded-3xl overflow-hidden flex flex-col group">
+          <div class="relative h-56 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80" alt="Lash Design" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-eggplant via-eggplant/30 to-transparent"></div>
+            <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-obsidian/80 backdrop-blur-md border border-rose-gold/40 flex items-center justify-center text-rose-gold">
+              <i data-lucide="sparkles" class="w-5 h-5"></i>
+            </div>
+            <span class="absolute bottom-3 left-6 text-xs font-syne uppercase tracking-wider text-rose-gold font-bold">Categoria 01</span>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-syne font-bold text-xl text-pearl mb-3">Lash Design (Cílios)</h3>
+              <ul class="space-y-2 text-xs text-mauve mb-6">
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-gold"></i> Volume Russo & Mega Volume</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-gold"></i> Volume Brasileiro & Egípcio</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-gold"></i> Efeito Fox Eyes & Sirena</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-gold"></i> Lash Lifting com Tintura e Botox</li>
+              </ul>
+            </div>
+            <button onclick="selectAndScrollService('Cílios (Volume Russo/Brasileiro)')" class="w-full py-3 rounded-full bg-white/[0.04] hover:bg-rose-gradient hover:text-obsidian border border-white/10 hover:border-rose-gold font-syne font-bold text-xs uppercase tracking-wider text-pearl transition-all flex items-center justify-center gap-2">
+              <span>Selecionar Especialidade</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Categoria 2: Arquitetura do Olhar -->
+        <div class="glass-card rounded-3xl overflow-hidden flex flex-col group">
+          <div class="relative h-56 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1588516903720-8ceb67f9ef84?auto=format&fit=crop&w=800&q=80" alt="Arquitetura do Olhar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-eggplant via-eggplant/30 to-transparent"></div>
+            <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-obsidian/80 backdrop-blur-md border border-rose-gold/40 flex items-center justify-center text-rose-gold">
+              <i data-lucide="eye" class="w-5 h-5"></i>
+            </div>
+            <span class="absolute bottom-3 left-6 text-xs font-syne uppercase tracking-wider text-rose-gold font-bold">Categoria 02</span>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-syne font-bold text-xl text-pearl mb-3">Arquitetura do Olhar</h3>
+              <ul class="space-y-2 text-xs text-mauve mb-6">
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-gold"></i> Design Estratégico com Visagismo</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-gold"></i> Aplicação de Henna Ombré Natural</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-gold"></i> Brow Lamination com Nutrição</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-gold"></i> Micropigmentação Nanoblading / Shadow</li>
+              </ul>
+            </div>
+            <button onclick="selectAndScrollService('Sobrancelha & Henna Ombré')" class="w-full py-3 rounded-full bg-white/[0.04] hover:bg-rose-gradient hover:text-obsidian border border-white/10 hover:border-rose-gold font-syne font-bold text-xs uppercase tracking-wider text-pearl transition-all flex items-center justify-center gap-2">
+              <span>Selecionar Especialidade</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Categoria 3: Nail Couture -->
+        <div class="glass-card rounded-3xl overflow-hidden flex flex-col group">
+          <div class="relative h-56 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=800&q=80" alt="Nail Couture" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-eggplant via-eggplant/30 to-transparent"></div>
+            <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-obsidian/80 backdrop-blur-md border border-rose-gold/40 flex items-center justify-center text-rose-gold">
+              <i data-lucide="gem" class="w-5 h-5"></i>
+            </div>
+            <span class="absolute bottom-3 left-6 text-xs font-syne uppercase tracking-wider text-rose-gold font-bold">Categoria 03</span>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-syne font-bold text-xl text-pearl mb-3">Nail Couture (Unhas)</h3>
+              <ul class="space-y-2 text-xs text-mauve mb-6">
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-gold"></i> Alongamento em Fibra de Vidro Slim</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-gold"></i> Banho de Gel & Blindagem Diamante</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-gold"></i> Esmaltação em Gel de Longa Duração</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-gold"></i> Nail Art Encapsulada & Spa dos Pés</li>
+              </ul>
+            </div>
+            <button onclick="selectAndScrollService('Unhas em Gel / Fibra')" class="w-full py-3 rounded-full bg-white/[0.04] hover:bg-rose-gradient hover:text-obsidian border border-white/10 hover:border-rose-gold font-syne font-bold text-xs uppercase tracking-wider text-pearl transition-all flex items-center justify-center gap-2">
+              <span>Selecionar Especialidade</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Categoria 4: Hair Concept -->
+        <div class="glass-card rounded-3xl overflow-hidden flex flex-col group">
+          <div class="relative h-56 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=800&q=80" alt="Hair Concept" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-eggplant via-eggplant/30 to-transparent"></div>
+            <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-obsidian/80 backdrop-blur-md border border-rose-gold/40 flex items-center justify-center text-rose-gold">
+              <i data-lucide="scissors" class="w-5 h-5"></i>
+            </div>
+            <span class="absolute bottom-3 left-6 text-xs font-syne uppercase tracking-wider text-rose-gold font-bold">Categoria 04</span>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-syne font-bold text-xl text-pearl mb-3">Hair Concept (Cabelos)</h3>
+              <ul class="space-y-2 text-xs text-mauve mb-6">
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-gold"></i> Mechas Criativas & Morena Iluminada</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-gold"></i> Alisamento Orgânico Premium sem Formol</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-gold"></i> Ozonioterapia & Cronograma VIP</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-gold"></i> Corte Bordado com Selagem de Pontas</li>
+              </ul>
+            </div>
+            <button onclick="selectAndScrollService('Cabelo & Mechas Iluminadas')" class="w-full py-3 rounded-full bg-white/[0.04] hover:bg-rose-gradient hover:text-obsidian border border-white/10 hover:border-rose-gold font-syne font-bold text-xs uppercase tracking-wider text-pearl transition-all flex items-center justify-center gap-2">
+              <span>Selecionar Especialidade</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Categoria 5: Lip & Face Glow -->
+        <div class="glass-card rounded-3xl overflow-hidden flex flex-col group">
+          <div class="relative h-56 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=800&q=80" alt="Lip & Face Glow" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-eggplant via-eggplant/30 to-transparent"></div>
+            <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-obsidian/80 backdrop-blur-md border border-rose-gold/40 flex items-center justify-center text-rose-gold">
+              <i data-lucide="heart" class="w-5 h-5"></i>
+            </div>
+            <span class="absolute bottom-3 left-6 text-xs font-syne uppercase tracking-wider text-rose-gold font-bold">Categoria 05</span>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-syne font-bold text-xl text-pearl mb-3">Lip & Face Glow</h3>
+              <ul class="space-y-2 text-xs text-mauve mb-6">
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-gold"></i> Hidragloss Labial Regenerador</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-gold"></i> Micropigmentação Labial (Aquarelle/Batom)</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-gold"></i> Limpeza de Pele Profunda Express Glow</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-gold"></i> Depilação Egípcia Facial com Fio 100% Algodão</li>
+              </ul>
+            </div>
+            <button onclick="selectAndScrollService('Hidragloss & Face Glow')" class="w-full py-3 rounded-full bg-white/[0.04] hover:bg-rose-gradient hover:text-obsidian border border-white/10 hover:border-rose-gold font-syne font-bold text-xs uppercase tracking-wider text-pearl transition-all flex items-center justify-center gap-2">
+              <span>Selecionar Especialidade</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Categoria 6: Produção & Make -->
+        <div class="glass-card rounded-3xl overflow-hidden flex flex-col group">
+          <div class="relative h-56 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=800&q=80" alt="Produção & Make" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-eggplant via-eggplant/30 to-transparent"></div>
+            <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-obsidian/80 backdrop-blur-md border border-rose-gold/40 flex items-center justify-center text-rose-gold">
+              <i data-lucide="crown" class="w-5 h-5"></i>
+            </div>
+            <span class="absolute bottom-3 left-6 text-xs font-syne uppercase tracking-wider text-rose-gold font-bold">Categoria 06</span>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-syne font-bold text-xl text-pearl mb-3">Produção & Make</h3>
+              <ul class="space-y-2 text-xs text-mauve mb-6">
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-gold"></i> Maquiagem Blindada à Prova de Lágrimas</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-gold"></i> Penteados Estruturados & Despojados</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-gold"></i> Ondas Babyliss Glamour de Longa Fixação</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-rose-gold"></i> Produção Completa para Madrinhas & Noivas</li>
+              </ul>
+            </div>
+            <button onclick="selectAndScrollService('Produção & Penteado VIP')" class="w-full py-3 rounded-full bg-white/[0.04] hover:bg-rose-gradient hover:text-obsidian border border-white/10 hover:border-rose-gold font-syne font-bold text-xs uppercase tracking-wider text-pearl transition-all flex items-center justify-center gap-2">
+              <span>Selecionar Especialidade</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- D. SEÇÃO "COMBOS DAY SPA" (AUMENTADORES DE TICKET MÉDIO) -->
+    <!-- ============================================================ -->
+    <section id="combos" class="py-20 px-4 relative overflow-hidden">
+      <!-- Glow Decorator -->
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-80 bg-rose-gold/5 blur-[120px] pointer-events-none"></div>
+
+      <div class="max-w-6xl mx-auto relative z-10">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-berry/20 border border-berry/40 text-rose-gold text-xs font-bold uppercase tracking-wider mb-3">
+            <i data-lucide="flame" class="w-3.5 h-3.5 text-rose-gold"></i>
+            Experiência VIP Combinada
+          </div>
+          <h2 class="font-syne font-extrabold text-3xl sm:text-4xl lg:text-5xl text-pearl mb-4">
+            Combos Day Spa de Luxo
+          </h2>
+          <p class="text-mauve text-sm sm:text-base">
+            Otimize seu tempo e viva um momento de autocuidado pleno com valores especiais na contratação casada.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+          
+          <!-- Combo 1: Express Glow -->
+          <div class="glass-card rounded-3xl p-8 flex flex-col justify-between border-white/10 hover:border-rose-gold/40">
+            <div>
+              <div class="flex justify-between items-center mb-4">
+                <span class="text-xs uppercase font-syne font-bold tracking-widest text-mauve">Rápido & Radiante</span>
+                <span class="px-2.5 py-1 rounded-full bg-white/5 text-[11px] text-pearl font-mono">~ 2h Duração</span>
+              </div>
+              <h3 class="text-2xl font-syne font-bold text-pearl mb-2">Combo 1: Express Glow</h3>
+              <p class="text-xs text-mauve mb-6">Perfeito para eventos no mesmo dia ou para quem precisa de um up urgente no visual.</p>
+              
+              <ul class="space-y-3.5 text-xs text-pearl/90 mb-8 border-t border-white/10 pt-6">
+                <li class="flex items-start gap-2.5">
+                  <div class="w-5 h-5 rounded-full bg-rose-gold/10 text-rose-gold flex items-center justify-center shrink-0 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5"></i></div>
+                  <span>Design de Sobrancelha com Henna Ombré</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <div class="w-5 h-5 rounded-full bg-rose-gold/10 text-rose-gold flex items-center justify-center shrink-0 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5"></i></div>
+                  <span>Esmaltação em Gel (Secagem Imediata na Cabine)</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <div class="w-5 h-5 rounded-full bg-rose-gold/10 text-rose-gold flex items-center justify-center shrink-0 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5"></i></div>
+                  <span>Escova Modelada com Finalização Glamour</span>
+                </li>
+              </ul>
+            </div>
+
+            <a href="https://wa.me/5511999999999?text=Ol%C3%A1%21%20Gostaria%20de%20reservar%20o%20Combo%201%20-%20Express%20Glow%20no%20Velvet%20Studio." target="_blank" class="w-full py-4 rounded-full bg-white/[0.05] hover:bg-white/[0.1] border border-white/15 hover:border-rose-gold text-pearl font-syne font-bold text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2">
+              <i data-lucide="message-circle" class="w-4 h-4 text-rose-gold"></i>
+              Quero Esse Combo no WhatsApp
+            </a>
+          </div>
+
+          <!-- Combo 2: Olhar & Poder (DESTAQUE VIP - 80% DAS CLIENTES) -->
+          <div class="relative glass-card rounded-3xl p-8 flex flex-col justify-between border-rose-gold shadow-rose-glow bg-gradient-to-b from-eggplant-light to-eggplant lg:-translate-y-4">
+            
+            <!-- Ribbon Badge -->
+            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-rose-gradient text-obsidian font-syne font-extrabold text-[11px] uppercase tracking-wider shadow-lg flex items-center gap-1.5 whitespace-nowrap">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+              Escolha de 80% das Clientes
+            </div>
+
+            <div>
+              <div class="flex justify-between items-center mb-4 pt-2">
+                <span class="text-xs uppercase font-syne font-extrabold tracking-widest text-rose-gold">Mais Vendido do Estúdio</span>
+                <span class="px-2.5 py-1 rounded-full bg-rose-gold/20 text-[11px] text-rose-gold font-mono font-bold">~ 3h30 Duração</span>
+              </div>
+              <h3 class="text-2xl font-syne font-extrabold text-pearl mb-2">Combo 2: Olhar & Poder</h3>
+              <p class="text-xs text-mauve mb-6">A tríade indispensável que garante acordar pronta, elegante e confiante pelos próximos 30 dias.</p>
+              
+              <ul class="space-y-3.5 text-xs text-pearl mb-8 border-t border-rose-gold/20 pt-6">
+                <li class="flex items-start gap-2.5">
+                  <div class="w-5 h-5 rounded-full bg-rose-gradient text-obsidian flex items-center justify-center shrink-0 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i></div>
+                  <span class="font-medium">Extensão de Cílios (Volume Russo ou Lash Lifting VIP)</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <div class="w-5 h-5 rounded-full bg-rose-gradient text-obsidian flex items-center justify-center shrink-0 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i></div>
+                  <span class="font-medium">Brow Lamination com Nutrição & Alinhamento de Fios</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <div class="w-5 h-5 rounded-full bg-rose-gradient text-obsidian flex items-center justify-center shrink-0 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i></div>
+                  <span class="font-medium">Alongamento / Manutenção em Fibra de Vidro Slim</span>
+                </li>
+                <li class="flex items-start gap-2.5 text-rose-gold">
+                  <div class="w-5 h-5 rounded-full bg-rose-gold/20 text-rose-gold flex items-center justify-center shrink-0 mt-0.5"><i data-lucide="gift" class="w-3.5 h-3.5"></i></div>
+                  <span class="font-semibold">Mimo: Hidratação Labial com Ácido Hialurônico</span>
+                </li>
+              </ul>
+            </div>
+
+            <a href="https://wa.me/5511999999999?text=Ol%C3%A1%21%20Quero%20agendar%20o%20Combo%202%20-%20Olhar%20%26%20Poder%20%28Destaque%29%20no%20Velvet%20Studio." target="_blank" class="w-full py-4 rounded-full bg-rose-gradient text-obsidian font-syne font-extrabold text-xs uppercase tracking-wider text-center hover:shadow-rose-glow hover:opacity-95 transition-all flex items-center justify-center gap-2">
+              <i data-lucide="sparkle" class="w-4 h-4 fill-obsidian"></i>
+              Quero Esse Combo no WhatsApp
+            </a>
+          </div>
+
+          <!-- Combo 3: Transformação Velvet Completa -->
+          <div class="glass-card rounded-3xl p-8 flex flex-col justify-between border-white/10 hover:border-rose-gold/40">
+            <div>
+              <div class="flex justify-between items-center mb-4">
+                <span class="text-xs uppercase font-syne font-bold tracking-widest text-mauve">Day Spa All-Inclusive</span>
+                <span class="px-2.5 py-1 rounded-full bg-white/5 text-[11px] text-pearl font-mono">Dia Inteiro VIP</span>
+              </div>
+              <h3 class="text-2xl font-syne font-bold text-pearl mb-2">Combo 3: Transformação Total</h3>
+              <p class="text-xs text-mauve mb-6">Uma renovação radical de autoestima. Saia do estúdio parecendo capa de revista de moda.</p>
+              
+              <ul class="space-y-3.5 text-xs text-pearl/90 mb-8 border-t border-white/10 pt-6">
+                <li class="flex items-start gap-2.5">
+                  <div class="w-5 h-5 rounded-full bg-rose-gold/10 text-rose-gold flex items-center justify-center shrink-0 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5"></i></div>
+                  <span>Mechas Criativas ou Morena Iluminada Signature</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <div class="w-5 h-5 rounded-full bg-rose-gold/10 text-rose-gold flex items-center justify-center shrink-0 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5"></i></div>
+                  <span>Tratamento Reconstrutor Capilar com Ozonioterapia</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <div class="w-5 h-5 rounded-full bg-rose-gold/10 text-rose-gold flex items-center justify-center shrink-0 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5"></i></div>
+                  <span>Alongamento em Fibra + Spa Plástica dos Pés</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <div class="w-5 h-5 rounded-full bg-rose-gold/10 text-rose-gold flex items-center justify-center shrink-0 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5"></i></div>
+                  <span>Olhar Completo: Cílios de Grife + Design de Sobrancelha</span>
+                </li>
+                <li class="flex items-start gap-2.5 text-rose-gold">
+                  <div class="w-5 h-5 rounded-full bg-rose-gold/20 text-rose-gold flex items-center justify-center shrink-0 mt-0.5"><i data-lucide="coffee" class="w-3.5 h-3.5"></i></div>
+                  <span class="font-semibold">Taça de Espumante & Menu de Boas-Vindas no Café</span>
+                </li>
+              </ul>
+            </div>
+
+            <a href="https://wa.me/5511999999999?text=Ol%C3%A1%21%20Gostaria%20de%20consultar%20datas%20para%20o%20Combo%203%20-%20Transforma%C3%A7%C3%A3o%20Velvet%20Completa." target="_blank" class="w-full py-4 rounded-full bg-white/[0.05] hover:bg-white/[0.1] border border-white/15 hover:border-rose-gold text-pearl font-syne font-bold text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2">
+              <i data-lucide="message-circle" class="w-4 h-4 text-rose-gold"></i>
+              Quero Esse Combo no WhatsApp
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- E. COMPARADOR INTERATIVO ANTES & DEPOIS + PROVA SOCIAL DIRECT -->
+    <!-- ============================================================ -->
+    <section id="transformacoes" class="py-20 px-4 max-w-6xl mx-auto">
+      
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="text-xs uppercase tracking-[0.25em] font-syne font-bold text-rose-gold block mb-2">Resultados Reais</span>
+        <h2 class="font-syne font-extrabold text-3xl sm:text-4xl lg:text-5xl text-pearl mb-4">
+          A Diferença do Padrão Velvet
+        </h2>
+        <p class="text-mauve text-sm sm:text-base">
+          Arraste a barra para conferir a precisão milimétrica em cada procedimento. Do natural ao impactante, com saúde e durabilidade.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left: Before/After Interactive Slider (7 cols) -->
+        <div class="lg:col-span-7 glass-card rounded-3xl p-6 border-white/15">
+          
+          <!-- Category Tabs -->
+          <div class="flex items-center justify-center gap-2 mb-6 p-1.5 bg-obsidian rounded-2xl border border-white/10 max-w-md mx-auto">
+            <button onclick="switchComparison('sobrancelha')" id="tab-sobrancelha" class="case-tab flex-1 py-2 px-3 rounded-xl font-syne font-bold text-xs transition-all bg-rose-gradient text-obsidian shadow-sm">
+              Sobrancelha
+            </button>
+            <button onclick="switchComparison('unhas')" id="tab-unhas" class="case-tab flex-1 py-2 px-3 rounded-xl font-syne font-bold text-xs text-mauve hover:text-pearl transition-all">
+              Unhas Fibra
+            </button>
+            <button onclick="switchComparison('hair')" id="tab-hair" class="case-tab flex-1 py-2 px-3 rounded-xl font-syne font-bold text-xs text-mauve hover:text-pearl transition-all">
+              Morena Iluminada
+            </button>
+          </div>
+
+          <!-- Slider Container -->
+          <div class="slider-container relative rounded-2xl h-[420px] sm:h-[480px] w-full overflow-hidden border border-white/10 shadow-2xl">
+            
+            <!-- After Image (Base) -->
+            <img id="img-after" src="https://images.unsplash.com/photo-1588516903720-8ceb67f9ef84?auto=format&fit=crop&w=1000&q=80" alt="Depois Velvet" class="slider-image-after">
+            <span class="absolute bottom-4 right-4 z-10 px-3 py-1 rounded-full bg-obsidian/80 backdrop-blur-md border border-rose-gold/40 text-xs font-syne font-bold text-rose-gold tracking-wider">
+              DEPOIS (VELVET)
+            </span>
+
+            <!-- Before Image (Overlaid with width control) -->
+            <div id="before-wrapper" class="slider-before-wrapper" style="width: 50%;">
+              <img id="img-before" src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1000&q=80" alt="Antes Velvet" class="slider-image-before">
+              <span class="absolute bottom-4 left-4 z-10 px-3 py-1 rounded-full bg-obsidian/80 backdrop-blur-md border border-white/20 text-xs font-syne font-bold text-mauve tracking-wider">
+                ANTES
+              </span>
+            </div>
+
+            <!-- Custom Drag Handle -->
+            <div id="slider-handle" class="slider-handle" style="left: 50%;">
+              <div class="w-10 h-10 rounded-full bg-rose-gradient shadow-rose-glow flex items-center justify-center text-obsidian border-2 border-white">
+                <i data-lucide="chevrons-left-right" class="w-5 h-5"></i>
+              </div>
+            </div>
+
+            <!-- Native Range Input to capture touch & mouse smoothly -->
+            <input type="range" min="0" max="100" value="50" class="slider-input" id="range-slider" aria-label="Controle de Antes e Depois">
+          </div>
+
+          <div class="flex items-center justify-between text-xs text-mauve mt-4 px-2">
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-rose-gold"></i>
+              Procedimento: <strong id="case-name" class="text-pearl">Micropigmentação Nanoblading</strong>
+            </span>
+            <span class="text-rose-gold font-medium">◂ Arraste para comparar ▸</span>
+          </div>
+
+        </div>
+
+        <!-- Right: 3 Directs Instagram / WhatsApp Testimonials (5 cols) -->
+        <div class="lg:col-span-5 flex flex-col gap-4">
+          <div class="flex items-center justify-between px-2">
+            <h3 class="font-syne font-bold text-lg text-pearl flex items-center gap-2">
+              <i data-lucide="message-square" class="w-4 h-4 text-rose-gold"></i>
+              O Que Elas Dizem no Direct
+            </h3>
+            <span class="text-[11px] text-rose-gold bg-rose-gold/10 px-2.5 py-0.5 rounded-full border border-rose-gold/20">Mensagens Reais</span>
+          </div>
+
+          <!-- Direct 1 -->
+          <div class="glass-card rounded-2xl p-4 border-white/10 hover:border-rose-gold/40 transition-all">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Cliente Camila" class="w-10 h-10 rounded-full object-cover border border-rose-gold/40">
+                <div>
+                  <h4 class="font-syne font-bold text-xs text-pearl">@camila.brandao</h4>
+                  <span class="text-[10px] text-mauve">Atendida há 2 dias • Mechas & Unhas</span>
+                </div>
+              </div>
+              <span class="text-rose-gold text-lg">❤️</span>
+            </div>
+            <div class="bg-obsidian/70 rounded-xl p-3 border border-white/5 text-xs text-pearl/90 leading-relaxed relative">
+              "Gente, eu nunca recebi tantos elogios no trabalho!! O loiro ficou zero ressecado e a unha de fibra parece minha de tão fininha. Vocês ganharam uma cliente fiel pro resto da vida! Obrigada pelo carinho."
+            </div>
+          </div>
+
+          <!-- Direct 2 -->
+          <div class="glass-card rounded-2xl p-4 border-white/10 hover:border-rose-gold/40 transition-all">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80" alt="Cliente Beatriz" class="w-10 h-10 rounded-full object-cover border border-rose-gold/40">
+                <div>
+                  <h4 class="font-syne font-bold text-xs text-pearl">@beatriz.medeiros</h4>
+                  <span class="text-[10px] text-mauve">Atendida no Sábado • Cílios & Sobrancelha</span>
+                </div>
+              </div>
+              <span class="text-rose-gold text-lg">🔥</span>
+            </div>
+            <div class="bg-obsidian/70 rounded-xl p-3 border border-white/5 text-xs text-pearl/90 leading-relaxed relative">
+              "Amiga do céu, acordei hoje só passei um gloss e já estava pronta pra sair de casa sem base nem rímel. O volume brasileiro ficou super leve, nem sinto nos olhos. Recomendo de olhos fechados!"
+            </div>
+          </div>
+
+          <!-- Direct 3 -->
+          <div class="glass-card rounded-2xl p-4 border-white/10 hover:border-rose-gold/40 transition-all">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80" alt="Cliente Mariana" class="w-10 h-10 rounded-full object-cover border border-rose-gold/40">
+                <div>
+                  <h4 class="font-syne font-bold text-xs text-pearl">@mari.albuquerque</h4>
+                  <span class="text-[10px] text-mauve">Atendida na Quarta • Combo Day Spa</span>
+                </div>
+              </div>
+              <span class="text-rose-gold text-lg">✨</span>
+            </div>
+            <div class="bg-obsidian/70 rounded-xl p-3 border border-white/5 text-xs text-pearl/90 leading-relaxed relative">
+              "Aquele cappuccino de avelã que vocês servem e o ambiente todo cheiroso... parecia que eu tava num hotel boutique de luxo. Vale cada centavo do investimento!"
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- F. SEÇÃO "A MENTE POR TRÁS DO ESTÚDIO" (STORYTELLING COM OVERLAP) -->
+    <!-- ============================================================ -->
+    <section id="fundadora" class="py-24 px-4 relative overflow-hidden">
+      
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Text Box Overlapping (Left 7 cols) -->
+          <div class="lg:col-span-7 order-2 lg:order-1 relative z-20">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-gold/15 border border-rose-gold/30 text-rose-gold text-xs font-bold uppercase tracking-wider mb-4">
+              <i data-lucide="crown" class="w-3.5 h-3.5"></i>
+              A Mente Por Trás do Velvet
+            </div>
+
+            <h2 class="font-syne font-extrabold text-3xl sm:text-4xl lg:text-5xl text-pearl mb-6 leading-tight">
+              "Beleza não é sobre parecer outra pessoa. É sobre amplificar a sua versão mais poderosa."
+            </h2>
+
+            <div class="space-y-4 text-mauve text-sm sm:text-base leading-relaxed mb-8">
+              <p>
+                Olá, sou <strong class="text-pearl font-semibold">Juliana Silveira</strong>, fundadora e diretora criativa do <strong class="text-rose-gold">VELVET Studio Beauty</strong>.
+              </p>
+              <p>
+                Durante anos acompanhei a rotina exaustiva da mulher moderna: perder a tarde de sábado correndo em 4 salões diferentes pela cidade para fazer unha num lugar, cabelo no outro e cílios num terceiro endereço.
+              </p>
+              <p>
+                Criei o Velvet com um propósito inegociável: reunir uma equipe de altíssima precisão técnica sob o mesmo teto, em um ambiente acolhedor, refinado e com atendimento que respeita o seu tempo. Aqui você é recebida com drink especial, pontualidade britânica e sai com a certeza de estar no seu ápice.
+              </p>
+            </div>
+
+            <!-- Signature & Badges -->
+            <div class="pt-4 border-t border-white/10">
+              <div class="flex items-center justify-between flex-wrap gap-4 mb-8">
+                <div>
+                  <span class="font-serif italic text-2xl text-rose-gold tracking-wide">Juliana Silveira</span>
+                  <span class="block text-xs uppercase tracking-widest text-mauve mt-0.5 font-syne">Master Visagista & Fundadora</span>
+                </div>
+              </div>
+
+              <!-- 3 Selos de Autoridade -->
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-xl bg-rose-gold/10 text-rose-gold flex items-center justify-center shrink-0">
+                    <i data-lucide="award" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <h5 class="text-xs font-syne font-bold text-pearl">Certificação</h5>
+                    <p class="text-[11px] text-mauve">Internacional (Europa & EUA)</p>
+                  </div>
+                </div>
+
+                <div class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-xl bg-rose-gold/10 text-rose-gold flex items-center justify-center shrink-0">
+                    <i data-lucide="users" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <h5 class="text-xs font-syne font-bold text-pearl">+5.000 Mulheres</h5>
+                    <p class="text-[11px] text-mauve">Transformadas com Sucesso</p>
+                  </div>
+                </div>
+
+                <div class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-xl bg-rose-gold/10 text-rose-gold flex items-center justify-center shrink-0">
+                    <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <h5 class="text-xs font-syne font-bold text-pearl">Mentora VIP</h5>
+                    <p class="text-[11px] text-mauve">Formadora de 400+ Designers</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Photo with Rose Gold Aura & Overlap (Right 5 cols) -->
+          <div class="lg:col-span-5 order-1 lg:order-2 relative">
+            <div class="absolute -inset-4 bg-gradient-to-tr from-berry/30 via-rose-gold/20 to-transparent rounded-[2.5rem] blur-2xl"></div>
+            
+            <div class="relative rounded-[2.5rem] overflow-hidden border border-rose-gold/40 shadow-rose-card">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=80" alt="Juliana Silveira Fundadora Velvet Studio" class="w-full h-[520px] object-cover object-top hover:scale-105 transition-transform duration-700">
+              <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent"></div>
+              
+              <div class="absolute bottom-6 inset-x-6 p-4 rounded-2xl bg-eggplant/80 backdrop-blur-md border border-rose-gold/30 flex items-center justify-between">
+                <div>
+                  <span class="text-[11px] text-rose-gold font-syne uppercase tracking-wider font-semibold">Atendimento Pessoal</span>
+                  <p class="text-xs font-bold text-pearl">Agenda Exclusiva para Noivas & Consultorias</p>
+                </div>
+                <div class="w-8 h-8 rounded-full bg-rose-gradient flex items-center justify-center text-obsidian">
+                  <i data-lucide="check" class="w-4 h-4 stroke-[3]"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- G. INTERATIVO: MONTADOR INTELIGENTE DE AGENDAMENTO (JS) -->
+    <!-- ============================================================ -->
+    <section id="agendador" class="py-20 px-4 relative">
+      
+      <div class="max-w-4xl mx-auto relative z-10">
+        
+        <!-- Header Section -->
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-gradient text-obsidian text-xs font-syne font-extrabold uppercase tracking-wider mb-3 shadow-md">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 fill-obsidian"></i>
+            Calculadora de Desejos Velvet
+          </div>
+          <h2 class="font-syne font-extrabold text-3xl sm:text-4xl text-pearl mb-3">
+            Monte Seu Atendimento Personalizado
+          </h2>
+          <p class="text-mauve text-sm">
+            Selecione o que você quer fazer hoje e seu turno preferido. Nós geramos a mensagem completa direto no seu WhatsApp para confirmação em 1 clique!
+          </p>
+        </div>
+
+        <!-- Interactive Box -->
+        <div class="glass-card rounded-[2rem] p-6 sm:p-10 border-rose-gold/40 shadow-rose-glow bg-gradient-to-b from-eggplant-light/90 to-eggplant/95">
+          
+          <!-- Passo 1: O que vamos fazer hoje? -->
+          <div class="mb-10">
+            <div class="flex items-center justify-between mb-4">
+              <label class="font-syne font-bold text-sm sm:text-base text-pearl flex items-center gap-2">
+                <span class="w-6 h-6 rounded-full bg-rose-gradient text-obsidian text-xs flex items-center justify-center font-extrabold">1</span>
+                O que vamos fazer hoje? <span class="text-xs text-mauve font-normal">(Escolha um ou vários)</span>
+              </label>
+              <button onclick="clearSelectedServices()" class="text-[11px] text-rose-gold hover:underline">Limpar Seleção</button>
+            </div>
+
+            <!-- Chips Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5" id="services-chips-container">
+              
+              <button type="button" class="service-chip group py-3 px-3.5 rounded-2xl bg-obsidian/70 border border-white/10 hover:border-rose-gold/40 text-xs text-mauve text-left flex items-center justify-between transition-all" data-service="Unhas em Gel / Fibra">
+                <span class="font-medium text-pearl">Unhas em Gel</span>
+                <i data-lucide="check" class="check-icon w-3.5 h-3.5 text-rose-gold opacity-0 transition-opacity"></i>
+              </button>
+
+              <button type="button" class="service-chip group py-3 px-3.5 rounded-2xl bg-obsidian/70 border border-white/10 hover:border-rose-gold/40 text-xs text-mauve text-left flex items-center justify-between transition-all" data-service="Cílios (Volume Russo/Brasileiro)">
+                <span class="font-medium text-pearl">Cílios (Lash)</span>
+                <i data-lucide="check" class="check-icon w-3.5 h-3.5 text-rose-gold opacity-0 transition-opacity"></i>
+              </button>
+
+              <button type="button" class="service-chip group py-3 px-3.5 rounded-2xl bg-obsidian/70 border border-white/10 hover:border-rose-gold/40 text-xs text-mauve text-left flex items-center justify-between transition-all" data-service="Sobrancelha & Henna Ombré">
+                <span class="font-medium text-pearl">Sobrancelha/Henna</span>
+                <i data-lucide="check" class="check-icon w-3.5 h-3.5 text-rose-gold opacity-0 transition-opacity"></i>
+              </button>
+
+              <button type="button" class="service-chip group py-3 px-3.5 rounded-2xl bg-obsidian/70 border border-white/10 hover:border-rose-gold/40 text-xs text-mauve text-left flex items-center justify-between transition-all" data-service="Micropigmentação Labial / Sobrancelha">
+                <span class="font-medium text-pearl">Micropigmentação</span>
+                <i data-lucide="check" class="check-icon w-3.5 h-3.5 text-rose-gold opacity-0 transition-opacity"></i>
+              </button>
+
+              <button type="button" class="service-chip group py-3 px-3.5 rounded-2xl bg-obsidian/70 border border-white/10 hover:border-rose-gold/40 text-xs text-mauve text-left flex items-center justify-between transition-all" data-service="Cabelo & Mechas Iluminadas">
+                <span class="font-medium text-pearl">Cabelo / Mechas</span>
+                <i data-lucide="check" class="check-icon w-3.5 h-3.5 text-rose-gold opacity-0 transition-opacity"></i>
+              </button>
+
+              <button type="button" class="service-chip group py-3 px-3.5 rounded-2xl bg-obsidian/70 border border-white/10 hover:border-rose-gold/40 text-xs text-mauve text-left flex items-center justify-between transition-all" data-service="Hidragloss & Face Glow">
+                <span class="font-medium text-pearl">Hidragloss Labial</span>
+                <i data-lucide="check" class="check-icon w-3.5 h-3.5 text-rose-gold opacity-0 transition-opacity"></i>
+              </button>
+
+              <button type="button" class="service-chip group py-3 px-3.5 rounded-2xl bg-obsidian/70 border border-white/10 hover:border-rose-gold/40 text-xs text-mauve text-left flex items-center justify-between transition-all" data-service="Produção & Penteado VIP">
+                <span class="font-medium text-pearl">Make & Penteado</span>
+                <i data-lucide="check" class="check-icon w-3.5 h-3.5 text-rose-gold opacity-0 transition-opacity"></i>
+              </button>
+
+              <button type="button" class="service-chip group py-3 px-3.5 rounded-2xl bg-obsidian/70 border border-white/10 hover:border-rose-gold/40 text-xs text-mauve text-left flex items-center justify-between transition-all" data-service="Spa Plástica dos Pés">
+                <span class="font-medium text-pearl">Spa dos Pés</span>
+                <i data-lucide="check" class="check-icon w-3.5 h-3.5 text-rose-gold opacity-0 transition-opacity"></i>
+              </button>
+
+            </div>
+          </div>
+
+          <!-- Passo 2: Qual seu período preferido? -->
+          <div class="mb-10">
+            <label class="font-syne font-bold text-sm sm:text-base text-pearl flex items-center gap-2 mb-4">
+              <span class="w-6 h-6 rounded-full bg-rose-gradient text-obsidian text-xs flex items-center justify-center font-extrabold">2</span>
+              Qual seu período preferido para atendimento?
+            </label>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="period-chips-container">
+              
+              <button type="button" class="period-chip py-3.5 px-4 rounded-2xl bg-obsidian/70 border border-white/10 text-xs text-mauve text-center transition-all flex flex-col items-center justify-center gap-1 active" data-period="Manhã (09h às 12h)">
+                <span class="font-syne text-sm font-bold">Manhã</span>
+                <span class="text-[11px] opacity-80">09h às 12h</span>
+              </button>
+
+              <button type="button" class="period-chip py-3.5 px-4 rounded-2xl bg-obsidian/70 border border-white/10 text-xs text-mauve text-center transition-all flex flex-col items-center justify-center gap-1" data-period="Tarde (13h às 18h)">
+                <span class="font-syne text-sm font-bold">Tarde</span>
+                <span class="text-[11px] opacity-80">13h às 18h</span>
+              </button>
+
+              <button type="button" class="period-chip py-3.5 px-4 rounded-2xl bg-obsidian/70 border border-white/10 text-xs text-mauve text-center transition-all flex flex-col items-center justify-center gap-1" data-period="Noite / Sábado (18h às 21h ou Fim de Semana)">
+                <span class="font-syne text-sm font-bold">Noite / Sábado</span>
+                <span class="text-[11px] opacity-80">18h às 21h ou Sábado</span>
+              </button>
+
+            </div>
+          </div>
+
+          <!-- Passo 3: Seu Nome -->
+          <div class="mb-8">
+            <label for="client-name" class="font-syne font-bold text-sm sm:text-base text-pearl flex items-center gap-2 mb-3">
+              <span class="w-6 h-6 rounded-full bg-rose-gradient text-obsidian text-xs flex items-center justify-center font-extrabold">3</span>
+              Como podemos te chamar?
+            </label>
+            <div class="relative">
+              <input type="text" id="client-name" placeholder="Digite seu primeiro nome..." class="w-full py-4 pl-12 pr-4 rounded-2xl bg-obsidian/80 border border-white/15 focus:border-rose-gold text-pearl placeholder-mauve/60 text-sm focus:outline-none focus:ring-1 focus:ring-rose-gold transition-all">
+              <div class="absolute left-4 top-1/2 -translate-y-1/2 text-rose-gold">
+                <i data-lucide="user" class="w-5 h-5"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Preview da Mensagem Gerada -->
+          <div class="p-4 rounded-2xl bg-obsidian/90 border border-white/10 mb-8">
+            <span class="text-[11px] uppercase tracking-wider font-syne font-bold text-rose-gold flex items-center gap-1.5 mb-2">
+              <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+              Prévia da sua mensagem no WhatsApp:
+            </span>
+            <p id="whatsapp-preview-text" class="text-xs text-mauve font-mono leading-relaxed italic">
+              "Olá! Meu nome é [Seu Nome]. Vi o site do Velvet Studio e gostaria de consultar disponibilidade no período da Manhã (09h às 12h) para os seguintes serviços: [Selecione ao menos um serviço acima]."
+            </p>
+          </div>
+
+          <!-- Botão Gerador de WhatsApp -->
+          <button id="btn-generate-whatsapp" class="w-full py-5 rounded-full bg-rose-gradient text-obsidian font-syne font-extrabold text-sm uppercase tracking-wider hover:shadow-rose-glow hover:scale-[1.01] active:scale-95 transition-all flex items-center justify-center gap-3">
+            <i data-lucide="send" class="w-5 h-5"></i>
+            <span>Gerar Meu Pedido de Horário via WhatsApp</span>
+          </button>
+          
+          <p class="text-center text-[11px] text-mauve mt-3">
+            🔒 Resposta humana e rápida pela nossa concierge do estúdio. Sem robôs chatos.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- H. BASTIDORES DO ESTÚDIO & FAQ EM DUAS COLUNAS -->
+    <!-- ============================================================ -->
+    <section id="faq" class="py-20 px-4 max-w-6xl mx-auto">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <!-- Coluna Esquerda: Bastidores & Experiência (5 cols) -->
+        <div class="lg:col-span-5">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-gold/15 border border-rose-gold/30 text-rose-gold text-xs font-bold uppercase tracking-wider mb-4">
+            <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+            Estrutura & Conforto
+          </div>
+          
+          <h2 class="font-syne font-extrabold text-3xl sm:text-4xl text-pearl mb-4">
+            O Padrão Ouro de Higiene e Experiência
+          </h2>
+
+          <p class="text-mauve text-sm leading-relaxed mb-8">
+            Nossa obsessão por segurança e conforto faz com que cada visita seja uma pausa relaxante na sua rotina corrida.
+          </p>
+
+          <div class="space-y-4">
+            
+            <div class="flex items-start gap-4 p-4 rounded-2xl glass-card border-white/10">
+              <div class="w-10 h-10 rounded-xl bg-rose-gold/15 text-rose-gold flex items-center justify-center shrink-0">
+                <i data-lucide="activity" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h4 class="font-syne font-bold text-sm text-pearl mb-1">Biossegurança Hospitalar</h4>
+                <p class="text-xs text-mauve">Autoclave com laudo biológico mensal, kits individuais esterilizados e envelopes abertos na sua frente.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4 p-4 rounded-2xl glass-card border-white/10">
+              <div class="w-10 h-10 rounded-xl bg-rose-gold/15 text-rose-gold flex items-center justify-center shrink-0">
+                <i data-lucide="car" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h4 class="font-syne font-bold text-sm text-pearl mb-1">Estacionamento com Valet</h4>
+                <p class="text-xs text-mauve">Chegue com calma e tranquilidade. Vagas seguras privativas em frente à entrada do estúdio.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4 p-4 rounded-2xl glass-card border-white/10">
+              <div class="w-10 h-10 rounded-xl bg-rose-gold/15 text-rose-gold flex items-center justify-center shrink-0">
+                <i data-lucide="coffee" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h4 class="font-syne font-bold text-sm text-pearl mb-1">Espaço Café & Drinks Bar</h4>
+                <p class="text-xs text-mauve">Cappuccinos especiais, drinks selecionados, espumante e Wi-Fi ultrarrápido para você trabalhar enquanto se cuida.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Coluna Direita: FAQ Accordion (7 cols) -->
+        <div class="lg:col-span-7">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-berry/20 border border-berry/40 text-rose-gold text-xs font-bold uppercase tracking-wider mb-4">
+            <i data-lucide="help-circle" class="w-3.5 h-3.5"></i>
+            Tire Suas Dúvidas
+          </div>
+
+          <h2 class="font-syne font-extrabold text-3xl sm:text-4xl text-pearl mb-6">
+            Perguntas Frequentes
+          </h2>
+
+          <div class="space-y-4" id="faq-accordion">
+            
+            <!-- FAQ 1 -->
+            <div class="faq-item glass-card rounded-2xl border-white/10 overflow-hidden transition-all">
+              <button class="faq-toggle w-full p-5 text-left flex items-center justify-between gap-4 font-syne font-bold text-sm sm:text-base text-pearl hover:text-rose-gold transition-colors">
+                <span>Quanto tempo dura a extensão de cílios e as unhas de fibra?</span>
+                <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-rose-gold transition-transform duration-300"></i>
+              </button>
+              <div class="faq-content hidden px-5 pb-5 text-xs sm:text-sm text-mauve leading-relaxed border-t border-white/5 pt-3">
+                A extensão de cílios tem ciclo de retenção de 20 a 30 dias (recomendamos manutenção a cada 20 dias para manter a densidade máxima). As unhas em fibra de vidro têm durabilidade indeterminada com manutenções preventivas a cada 20 a 25 dias.
+              </div>
+            </div>
+
+            <!-- FAQ 2 -->
+            <div class="faq-item glass-card rounded-2xl border-white/10 overflow-hidden transition-all">
+              <button class="faq-toggle w-full p-5 text-left flex items-center justify-between gap-4 font-syne font-bold text-sm sm:text-base text-pearl hover:text-rose-gold transition-colors">
+                <span>Posso fazer vários procedimentos no mesmo dia?</span>
+                <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-rose-gold transition-transform duration-300"></i>
+              </button>
+              <div class="faq-content hidden px-5 pb-5 text-xs sm:text-sm text-mauve leading-relaxed border-t border-white/5 pt-3">
+                Sim! Esse é justamente o nosso maior diferencial. Você pode agendar, por exemplo, unhas em gel e cílios ao mesmo tempo com duas especialistas trabalhando em sincronia, economizando metade do seu tempo no estúdio.
+              </div>
+            </div>
+
+            <!-- FAQ 3 -->
+            <div class="faq-item glass-card rounded-2xl border-white/10 overflow-hidden transition-all">
+              <button class="faq-toggle w-full p-5 text-left flex items-center justify-between gap-4 font-syne font-bold text-sm sm:text-base text-pearl hover:text-rose-gold transition-colors">
+                <span>Como funciona o teste de mechas e mechas sem dano?</span>
+                <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-rose-gold transition-transform duration-300"></i>
+              </button>
+              <div class="faq-content hidden px-5 pb-5 text-xs sm:text-sm text-mauve leading-relaxed border-t border-white/5 pt-3">
+                Antes de qualquer descoloração completa, realizamos um teste de mecha rigoroso e diagnóstico capilar com microcâmera. Utilizamos protetores de pontes de cistina que preservam a elasticidade e massa do fio durante o clareamento.
+              </div>
+            </div>
+
+            <!-- FAQ 4 -->
+            <div class="faq-item glass-card rounded-2xl border-white/10 overflow-hidden transition-all">
+              <button class="faq-toggle w-full p-5 text-left flex items-center justify-between gap-4 font-syne font-bold text-sm sm:text-base text-pearl hover:text-rose-gold transition-colors">
+                <span>Quais são as formas de pagamento aceitas?</span>
+                <i data-lucide="chevron-down" class="faq-icon w-5 h-5 text-rose-gold transition-transform duration-300"></i>
+              </button>
+              <div class="faq-content hidden px-5 pb-5 text-xs sm:text-sm text-mauve leading-relaxed border-t border-white/5 pt-3">
+                Aceitamos Pix com 5% de desconto especial em pacotes, cartões de crédito em até 10x sem juros (para combos e day spa), além de cartões de débito.
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ============================================================ -->
+  <!-- I. FOOTER BOUTIQUE & MAPA ESTILIZADO -->
+  <!-- ============================================================ -->
+  <footer class="bg-[#090608] border-t border-white/10 pt-16 pb-12 px-4 relative z-10">
+    <div class="max-w-6xl mx-auto">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-14">
+        
+        <!-- Col 1: Brand & Bio -->
+        <div>
+          <a href="#" class="inline-block mb-4">
+            <span class="font-syne font-extrabold text-2xl tracking-wider text-pearl">
+              VELVET<span class="text-rose-gold text-3xl leading-none">.</span>
+            </span>
+          </a>
+          <p class="text-xs text-mauve leading-relaxed mb-6">
+            O estúdio boutique onde precisão técnica, luxo silencioso e acolhimento se encontram. Especialistas em beleza integrada de alta durabilidade.
+          </p>
+          <div class="flex items-center gap-3">
+            <a href="https://instagram.com" target="_blank" class="w-9 h-9 rounded-full bg-white/5 hover:bg-rose-gradient hover:text-obsidian text-mauve flex items-center justify-center transition-all" aria-label="Instagram">
+              <i data-lucide="instagram" class="w-4 h-4"></i>
+            </a>
+            <a href="https://wa.me/5511999999999" target="_blank" class="w-9 h-9 rounded-full bg-white/5 hover:bg-rose-gradient hover:text-obsidian text-mauve flex items-center justify-center transition-all" aria-label="WhatsApp">
+              <i data-lucide="message-circle" class="w-4 h-4"></i>
+            </a>
+            <a href="https://tiktok.com" target="_blank" class="w-9 h-9 rounded-full bg-white/5 hover:bg-rose-gradient hover:text-obsidian text-mauve flex items-center justify-center transition-all" aria-label="TikTok">
+              <i data-lucide="video" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Col 2: Horários & Concierge -->
+        <div>
+          <h4 class="font-syne font-bold text-sm text-pearl uppercase tracking-wider mb-4 flex items-center gap-2">
+            <i data-lucide="clock" class="w-4 h-4 text-rose-gold"></i>
+            Horário de Funcionamento
+          </h4>
+          <ul class="space-y-2.5 text-xs text-mauve">
+            <li class="flex justify-between pb-2 border-b border-white/5">
+              <span>Terça a Sexta:</span>
+              <strong class="text-pearl">09h às 20h</strong>
+            </li>
+            <li class="flex justify-between pb-2 border-b border-white/5">
+              <span>Sábado VIP:</span>
+              <strong class="text-pearl">08h às 19h</strong>
+            </li>
+            <li class="flex justify-between pb-2 border-b border-white/5">
+              <span>Domingo & Segunda:</span>
+              <span class="text-rose-gold">Fechado / Cursos</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Localização & Rota Rápida -->
+        <div>
+          <h4 class="font-syne font-bold text-sm text-pearl uppercase tracking-wider mb-4 flex items-center gap-2">
+            <i data-lucide="map-pin" class="w-4 h-4 text-rose-gold"></i>
+            Endereço & Acesso
+          </h4>
+          <p class="text-xs text-mauve mb-4 leading-relaxed">
+            Av. das Acácias Nobres, 1420 - Jardins / Centro Nobre.<br>
+            Edifício Prime Tower, Loja Térrea 04.<br>
+            <span class="text-pearl">Vagas de garagem privativas com valet.</span>
+          </p>
+          <div class="flex gap-2">
+            <a href="https://maps.google.com" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-xs text-pearl border border-white/10 hover:border-rose-gold transition-colors">
+              <i data-lucide="navigation" class="w-3.5 h-3.5 text-rose-gold"></i>
+              Abrir no Maps
+            </a>
+            <a href="https://waze.com" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-xs text-pearl border border-white/10 hover:border-rose-gold transition-colors">
+              <i data-lucide="compass" class="w-3.5 h-3.5 text-rose-gold"></i>
+              Waze
+            </a>
+          </div>
+        </div>
+
+        <!-- Col 4: Acesso Rápido ao Agendamento -->
+        <div>
+          <h4 class="font-syne font-bold text-sm text-pearl uppercase tracking-wider mb-4 flex items-center gap-2">
+            <i data-lucide="sparkle" class="w-4 h-4 text-rose-gold"></i>
+            Atendimento Rápido
+          </h4>
+          <p class="text-xs text-mauve mb-4">
+            Nossa equipe de recepção responde rapidamente em horário comercial.
+          </p>
+          <a href="#agendador" class="w-full inline-flex items-center justify-center gap-2 py-3 rounded-full bg-rose-gradient text-obsidian font-syne font-bold text-xs uppercase tracking-wider hover:opacity-90 transition-opacity">
+            <i data-lucide="calendar" class="w-4 h-4"></i>
+            Montar Meu Atendimento
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-mauve/70">
+        <p>© 2026 VELVET Studio Beauty. Todos os direitos reservados.</p>
+        <p class="flex items-center gap-1">
+          Feito com <span class="text-rose-gold">♥</span> para mulheres que exigem excelência.
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ============================================================ -->
+  <!-- BOTÃO FLUTUANTE DO WHATSAPP -->
+  <!-- ============================================================ -->
+  <a href="https://wa.me/5511999999999?text=Ol%C3%A1%21%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20hor%C3%A1rios%20no%20Velvet%20Studio." target="_blank" class="fixed bottom-6 right-6 z-40 group flex items-center gap-2.5 p-3.5 sm:px-5 sm:py-3.5 rounded-full bg-[#25D366] text-white shadow-2xl hover:scale-105 active:scale-95 transition-all" aria-label="Falar no WhatsApp">
+    <i data-lucide="message-circle" class="w-6 h-6 fill-white text-[#25D366]"></i>
+    <span class="hidden sm:inline font-syne font-bold text-xs uppercase tracking-wider">
+      Agendar no WhatsApp
+    </span>
+  </a>
+
+  <!-- ============================================================ -->
+  <!-- JAVASCRIPT: LÓGICA DE NEGÓCIO, INTERATIVIDADE E MONTADOR -->
+  <!-- ============================================================ -->
+  <script>
+    // Inicializar ícones Lucide
+    lucide.createIcons();
+
+    // 1. Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileDrawer = document.getElementById('mobile-drawer');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+    if (mobileMenuBtn && mobileDrawer) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileDrawer.classList.toggle('hidden');
+        mobileDrawer.classList.toggle('flex');
+      });
+
+      mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileDrawer.classList.add('hidden');
+          mobileDrawer.classList.remove('flex');
+        });
+      });
+    }
+
+    // 2. Before / After Slider Logic
+    const rangeSlider = document.getElementById('range-slider');
+    const beforeWrapper = document.getElementById('before-wrapper');
+    const sliderHandle = document.getElementById('slider-handle');
+
+    if (rangeSlider && beforeWrapper && sliderHandle) {
+      rangeSlider.addEventListener('input', (e) => {
+        const value = e.target.value;
+        beforeWrapper.style.width = value + '%';
+        sliderHandle.style.left = value + '%';
+      });
+    }
+
+    // Casos de Antes e Depois
+    const comparisonCases = {
+      sobrancelha: {
+        name: 'Micropigmentação Nanoblading',
+        before: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1000&q=80',
+        after: 'https://images.unsplash.com/photo-1588516903720-8ceb67f9ef84?auto=format&fit=crop&w=1000&q=80'
+      },
+      unhas: {
+        name: 'Alongamento em Fibra de Vidro Slim',
+        before: 'https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&w=1000&q=80',
+        after: 'https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=1000&q=80'
+      },
+      hair: {
+        name: 'Morena Iluminada Caramel Glow Signature',
+        before: 'https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&w=1000&q=80',
+        after: 'https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=1000&q=80'
+      }
+    };
+
+    function switchComparison(type) {
+      const selected = comparisonCases[type];
+      if (!selected) return;
+
+      document.getElementById('img-before').src = selected.before;
+      document.getElementById('img-after').src = selected.after;
+      document.getElementById('case-name').innerText = selected.name;
+
+      // Update tabs style
+      document.querySelectorAll('.case-tab').forEach(tab => {
+        tab.className = 'case-tab flex-1 py-2 px-3 rounded-xl font-syne font-bold text-xs text-mauve hover:text-pearl transition-all';
+      });
+
+      const activeTab = document.getElementById('tab-' + type);
+      if (activeTab) {
+        activeTab.className = 'case-tab flex-1 py-2 px-3 rounded-xl font-syne font-bold text-xs transition-all bg-rose-gradient text-obsidian shadow-sm';
+      }
+
+      // Reset slider to center
+      if (rangeSlider && beforeWrapper && sliderHandle) {
+        rangeSlider.value = 50;
+        beforeWrapper.style.width = '50%';
+        sliderHandle.style.left = '50%';
+      }
+    }
+
+    // 3. Montador Inteligente de Agendamento (State & Logic)
+    let selectedServices = new Set(['Cílios (Volume Russo/Brasileiro)']); // Inicial pré-marcado
+    let selectedPeriod = 'Manhã (09h às 12h)';
+
+    const serviceChips = document.querySelectorAll('.service-chip');
+    const periodChips = document.querySelectorAll('.period-chip');
+    const clientNameInput = document.getElementById('client-name');
+    const whatsappPreviewText = document.getElementById('whatsapp-preview-text');
+    const btnGenerateWhatsapp = document.getElementById('btn-generate-whatsapp');
+
+    // Setup inicial de chips de serviço
+    serviceChips.forEach(chip => {
+      const service = chip.getAttribute('data-service');
+      if (selectedServices.has(service)) {
+        chip.classList.add('active');
+      }
+
+      chip.addEventListener('click', () => {
+        if (selectedServices.has(service)) {
+          selectedServices.delete(service);
+          chip.classList.remove('active');
+        } else {
+          selectedServices.add(service);
+          chip.classList.add('active');
+        }
+        updatePreview();
+      });
+    });
+
+    // Setup de chips de período (rádio)
+    periodChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        periodChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        selectedPeriod = chip.getAttribute('data-period');
+        updatePreview();
+      });
+    });
+
+    if (clientNameInput) {
+      clientNameInput.addEventListener('input', updatePreview);
+    }
+
+    function clearSelectedServices() {
+      selectedServices.clear();
+      serviceChips.forEach(c => c.classList.remove('active'));
+      updatePreview();
+    }
+
+    // Helper para selecionar e rolar da Vitrine até o montador
+    window.selectAndScrollService = function(serviceName) {
+      selectedServices.add(serviceName);
+      serviceChips.forEach(chip => {
+        if (chip.getAttribute('data-service') === serviceName) {
+          chip.classList.add('active');
+        }
+      });
+      updatePreview();
+
+      const agendadorSection = document.getElementById('agendador');
+      if (agendadorSection) {
+        agendadorSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    function updatePreview() {
+      const name = clientNameInput ? clientNameInput.value.trim() : '';
+      const clientGreeting = name ? `Meu nome é ${name}` : 'Meu nome é [Seu Nome]';
+      
+      let servicesList = 'Nenhum serviço selecionado ainda';
+      if (selectedServices.size > 0) {
+        servicesList = Array.from(selectedServices).join(', ');
+      }
+
+      const msg = `"Olá! ${clientGreeting}. Vi o site do Velvet Studio e gostaria de consultar disponibilidade no período da ${selectedPeriod} para os seguintes serviços: ${servicesList}."`;
+      if (whatsappPreviewText) {
+        whatsappPreviewText.innerText = msg;
+      }
+    }
+
+    // Disparar envio do WhatsApp
+    if (btnGenerateWhatsapp) {
+      btnGenerateWhatsapp.addEventListener('click', () => {
+        const name = clientNameInput ? clientNameInput.value.trim() : '';
+        const clientGreeting = name ? `Meu nome é ${name}` : 'Olá';
+
+        if (selectedServices.size === 0) {
+          alert('Por favor, selecione pelo menos 1 serviço que deseja realizar no Passo 1!');
+          return;
+        }
+
+        const servicesList = Array.from(selectedServices).join(', ');
+        const finalMessage = `Olá! ${clientGreeting}. Vi o site do Velvet Studio e gostaria de consultar disponibilidade no período da ${selectedPeriod} para os seguintes serviços: ${servicesList}.`;
+
+        const encodedMsg = encodeURIComponent(finalMessage);
+        const whatsappUrl = `https://wa.me/5511999999999?text=${encodedMsg}`;
+
+        window.open(whatsappUrl, '_blank');
+      });
+    }
+
+    // 4. Accordion FAQ
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const toggle = item.querySelector('.faq-toggle');
+      const content = item.querySelector('.faq-content');
+      const icon = item.querySelector('.faq-icon');
+
+      if (toggle && content && icon) {
+        toggle.addEventListener('click', () => {
+          const isOpen = !content.classList.contains('hidden');
+
+          // Close all others
+          faqItems.forEach(otherItem => {
+            const otherContent = otherItem.querySelector('.faq-content');
+            const otherIcon = otherItem.querySelector('.faq-icon');
+            if (otherContent) otherContent.classList.add('hidden');
+            if (otherIcon) otherIcon.classList.remove('rotate-180');
+          });
+
+          // Toggle current
+          if (!isOpen) {
+            content.classList.remove('hidden');
+            icon.classList.add('rotate-180');
+          }
+        });
+      }
+    });
+
+    // Update initial preview
+    updatePreview();
+  </script>
+</body>
+</html>
